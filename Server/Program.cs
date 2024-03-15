@@ -38,13 +38,23 @@ builder.Services.AddIdentityServer()
     })
     .AddDeveloperSigningCredential();
 
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseIdentityServer();
 
-app.UseHttpsRedirection();
+app.UseAuthorization();
 
-app.MapGet("/", () => "Hello World!");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapDefaultControllerRoute();
+});
+
+app.UseHttpsRedirection();
 
 app.Run();
