@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Server;
 using Server.Data;
+using ServiceDefaults.Extensions;
 
 var seed = args.Contains("/seed");
 if (seed)
@@ -39,6 +40,8 @@ builder.Services.AddIdentityServer()
     .AddDeveloperSigningCredential();
 
 builder.Services.AddControllersWithViews();
+
+builder.AddOpenTelemetry();
 
 var app = builder.Build();
 
