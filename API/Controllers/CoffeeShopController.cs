@@ -1,4 +1,5 @@
 ﻿using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "read")]
         public async Task<IActionResult> GetList()
         {
             var coffeeShops = await _coffeeShopService.List();
